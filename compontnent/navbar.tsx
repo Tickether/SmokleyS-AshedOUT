@@ -3,6 +3,7 @@ import ConnectCustom from './connectCustom/connectCustom'
 import Image from 'next/image'
 import logo from '../public/SmokleyS.svg';
 import Link from 'next/link';
+import { Web3Button } from '@web3modal/react';
 
 const Navbar = () => {
 
@@ -33,7 +34,10 @@ const Navbar = () => {
           </Link>
         </div>
         <div className={styles.connect}>
-          <ConnectCustom/>
+          <Web3Button icon="hide" label="Connect" balance="hide" />
+          {/**
+           * <ConnectCustom/>     
+          */}
         </div>
       </div>
 
