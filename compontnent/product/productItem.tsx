@@ -22,7 +22,7 @@ export default function ProductItem({product}: ProductProps) {
 
     const {address, isConnected} = useAccount()
 
-    const [lastestPtice, setLatestPrice] = useState<bigint>()
+    const [latestPrice, setLatestPrice] = useState<bigint>()
 
     const contractReadFee = useContractRead({
         address: "0x229C0715e70741F854C299913C2446eb4400e76C",
@@ -39,20 +39,16 @@ export default function ProductItem({product}: ProductProps) {
         args: [BigInt(product.tokenId)],
         chainId: 11155111,
     })
-
-    const getLatestPrice  = (contractReadFee?.data!)
-    
-    
-
     useEffect(() => {
         // prevent site breaking effect
-        if(getLatestPrice){
-            setLatestPrice((getLatestPrice))
+        if(contractReadFee?.data!){
+            setLatestPrice((contractReadFee?.data!))
         }
-    }, [getLatestPrice]);
-
-    const etherPrice = formatEther(lastestPtice!)
+    }, [contractReadFee]);
+    console.log(latestPrice)
+    const etherPrice = formatEther(latestPrice!)
     console.log(etherPrice)
+
 
     const  { config } = usePrepareContractWrite({
         address: "0x229C0715e70741F854C299913C2446eb4400e76C",
@@ -67,7 +63,7 @@ export default function ProductItem({product}: ProductProps) {
         ],
         functionName: "buy",
         args: [ (address!), (BigInt(product.tokenId)), (BigInt(1))],
-        value: getLatestPrice,
+        value: contractReadFee?.data!,
         chainId: 11155111,
     })
     const  contractWrite = useContractWrite(config)
@@ -83,7 +79,7 @@ export default function ProductItem({product}: ProductProps) {
     const handleCartAdd = async () => {
         try {
             if (cartItem.findIndex(cart => cart.product.tokenId ===product.tokenId) === -1) {
-                setCartItem(prevState => [...prevState, { product, quantity: 1, price: etherPrice! }])
+                setCartItem(prevState => [...prevState, { product, quantity: 1, price: etherPrice }])
                 /*
                 addToast('Carti!!!', { 
                     appearance: 'success',
@@ -137,7 +133,7 @@ export default function ProductItem({product}: ProductProps) {
                             <h2>{product.title}</h2>
                         </div>
                         <div>
-                            <p>eth:{etherPrice!}</p>
+                            <p>eth:{etherPrice}</p>
                         </div>
                         <div className={styles.productButtons}>
                             <button className={styles.productBuy} disabled={!isConnected} onClick={handleBuy}> Buy </button>
