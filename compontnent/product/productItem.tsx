@@ -14,15 +14,18 @@ interface ProductProps {
     product: Product
 }
 
+interface PriceProps {
+    etherPrice: string,
+}
 
 
-export default function ProductItem({product}: ProductProps) {
+const ProductItem = ({product}: ProductProps) => {
 
     const [cartItem, setCartItem] = useRecoilState(cartState)
 
     const {address, isConnected} = useAccount()
 
-    const [latestPrice, setLatestPrice] = useState<bigint>()
+    //const [latestPrice, setLatestPrice] = useState<bigint>()
 
     const contractReadFee = useContractRead({
         address: "0x229C0715e70741F854C299913C2446eb4400e76C",
@@ -39,14 +42,7 @@ export default function ProductItem({product}: ProductProps) {
         args: [BigInt(product.tokenId)],
         chainId: 11155111,
     })
-    useEffect(() => {
-        // prevent site breaking effect
-        if(contractReadFee?.data!){
-            setLatestPrice((contractReadFee?.data!))
-        }
-    }, [contractReadFee]);
-    console.log(latestPrice)
-    const etherPrice = formatEther(latestPrice!)
+    const etherPrice = contractReadFee?.data ? formatEther(contractReadFee.data) : '';
     console.log(etherPrice)
 
 
@@ -146,3 +142,5 @@ export default function ProductItem({product}: ProductProps) {
         </>
     )
 }
+
+export default ProductItem 
