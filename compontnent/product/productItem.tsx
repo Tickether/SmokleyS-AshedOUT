@@ -42,7 +42,7 @@ const ProductItem = ({product}: ProductProps) => {
         args: [BigInt(product.tokenId)],
         chainId: 11155111,
     })
-    const etherPrice = contractReadFee?.data ? formatEther(contractReadFee.data) : '';
+    const etherPrice = contractReadFee?.data ? formatEther(contractReadFee.data).toString() : '';
     console.log(etherPrice)
 
 
