@@ -3,6 +3,7 @@ import type { AppProps } from 'next/app'
 import { sepolia, mainnet, configureChains, createConfig, WagmiConfig } from 'wagmi'
 import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
 import { Web3Modal } from '@web3modal/react'
+import { RecoilRoot } from 'recoil'
 
 // Wagmi client
 const chains = [sepolia, mainnet];
@@ -43,7 +44,9 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <WagmiConfig config={wagmiConfig} >
-        <Component {...pageProps} />
+        <RecoilRoot>
+          <Component {...pageProps} />
+        </RecoilRoot>
       </WagmiConfig>
       <Web3Modal projectId={projectId} ethereumClient={ethereumClient} />
     </>
