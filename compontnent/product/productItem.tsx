@@ -47,8 +47,7 @@ export default function ProductItem({product}: ProductProps) {
     useEffect(() => {
         // prevent site breaking effect
         if(getLatestPrice){
-            const etherPrice = (formatEther(getLatestPrice))
-            setEtherPrice(etherPrice)
+            setEtherPrice(formatEther(getLatestPrice))
         }
     }, [getLatestPrice]);
 
