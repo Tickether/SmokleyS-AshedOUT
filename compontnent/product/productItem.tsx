@@ -22,7 +22,7 @@ export default function ProductItem({product}: ProductProps) {
 
     const {address, isConnected} = useAccount()
 
-    const [etherPrice, setEtherPrice] = useState<string>()
+    const [lastestPtice, setLatestPrice] = useState<bigint>()
 
     const contractReadFee = useContractRead({
         address: "0x229C0715e70741F854C299913C2446eb4400e76C",
@@ -47,10 +47,11 @@ export default function ProductItem({product}: ProductProps) {
     useEffect(() => {
         // prevent site breaking effect
         if(getLatestPrice){
-            setEtherPrice(formatEther(getLatestPrice))
+            setLatestPrice((getLatestPrice))
         }
     }, [getLatestPrice]);
 
+    const etherPrice = formatEther(lastestPtice!)
     console.log(etherPrice)
 
     const  { config } = usePrepareContractWrite({
