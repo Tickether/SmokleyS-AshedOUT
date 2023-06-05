@@ -4,8 +4,12 @@ import Image from 'next/image'
 import logo from '../public/SmokleyS.svg';
 import Link from 'next/link';
 import { Web3Button } from '@web3modal/react';
+import { cartState } from '@/atom/cartState';
+import { useRecoilState } from 'recoil';
 
 const Navbar = () => {
+
+  const [cartItemn] = useRecoilState(cartState)
 
   return (
     <>
@@ -30,7 +34,7 @@ const Navbar = () => {
             <span>Orders</span>
           </Link>
           <Link href='/cart'>
-            <span>Cart</span>
+            <span>Cart({cartItemn.length})</span>
           </Link>
         </div>
         <div className={styles.connect}>

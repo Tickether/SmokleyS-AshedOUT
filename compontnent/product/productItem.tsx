@@ -40,29 +40,16 @@ export const ProductItem = ({product}: ProductProps) => {
         args: [BigInt(product.tokenId)],
         chainId: 11155111,
     })
-    
-    console.log(etherPrice)
-
-    /*
-    useEffect(() => {
-        const getLatestPriceBigInt =  contractReadFee?.data! && typeof contractReadFee.data === 'bigint' 
-        ? setLatestPrice(getLatestPriceBigInt)
-        : BigInt(0);
-    },[contractReadFee?.data!])
-*/
     useEffect(() => {
         if (contractReadFee?.data! && typeof contractReadFee.data === 'bigint') {
             setEtherPrice(formatEther(contractReadFee?.data!))
             setLatestPrice(contractReadFee?.data!)
-
         }
-        /*
-        const getLatestPriceEther =  contractReadFee?.data! && typeof contractReadFee.data === 'bigint' 
-        ? formatEther(contractReadFee?.data!)
-        : '';
-        setEtherPrice(getLatestPriceEther)
-        */
     },[contractReadFee?.data!])
+    console.log(etherPrice)
+    console.log(latestPrice)
+
+    
     const  { config } = usePrepareContractWrite({
         address: "0x229C0715e70741F854C299913C2446eb4400e76C",
         abi: [
