@@ -45,7 +45,7 @@ export const ProductItem = ({product}: ProductProps) => {
     useEffect(() => {
         const getLatestPrice =  contractReadFee?.data! ? formatEther(contractReadFee?.data!) : '';
         setEtherPrice(getLatestPrice)
-    },[])
+    },[contractReadFee?.data!])
     const  { config } = usePrepareContractWrite({
         address: "0x229C0715e70741F854C299913C2446eb4400e76C",
         abi: [
