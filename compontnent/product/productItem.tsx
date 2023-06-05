@@ -14,18 +14,14 @@ interface ProductProps {
     product: Product
 }
 
-interface PriceProps {
-    etherPrice: string,
-}
 
-
-const ProductItem = ({product}: ProductProps) => {
+export const ProductItem = ({product}: ProductProps) => {
 
     const [cartItem, setCartItem] = useRecoilState(cartState)
 
     const {address, isConnected} = useAccount()
 
-    //const [latestPrice, setLatestPrice] = useState<bigint>()
+    const [etherPrice, setEtherPrice] = useState<string>('')
 
     const contractReadFee = useContractRead({
         address: "0x229C0715e70741F854C299913C2446eb4400e76C",
@@ -42,10 +38,14 @@ const ProductItem = ({product}: ProductProps) => {
         args: [BigInt(product.tokenId)],
         chainId: 11155111,
     })
-    const etherPrice = contractReadFee?.data ? formatEther(contractReadFee.data).toString() : '';
+    //const getLatestPrice = contractReadFee?.data!
+    //const getLatestPrice =  contractReadFee?.data! ? formatEther(contractReadFee?.data!) : '';
     console.log(etherPrice)
 
-
+    useEffect(() => {
+        const getLatestPrice =  contractReadFee?.data! ? formatEther(contractReadFee?.data!) : '';
+        setEtherPrice(getLatestPrice)
+    },[])
     const  { config } = usePrepareContractWrite({
         address: "0x229C0715e70741F854C299913C2446eb4400e76C",
         abi: [
@@ -75,7 +75,7 @@ const ProductItem = ({product}: ProductProps) => {
     const handleCartAdd = async () => {
         try {
             if (cartItem.findIndex(cart => cart.product.tokenId ===product.tokenId) === -1) {
-                setCartItem(prevState => [...prevState, { product, quantity: 1, price: etherPrice }])
+                setCartItem(prevState => [...prevState, { product, quantity: 1, price: contractReadFee?.data! }])
                 /*
                 addToast('Carti!!!', { 
                     appearance: 'success',
@@ -143,4 +143,3 @@ const ProductItem = ({product}: ProductProps) => {
     )
 }
 
-export default ProductItem 

@@ -5,7 +5,7 @@ import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import Navbar from '../compontnent/navbar'
 import Footer from '@/compontnent/footer'
-import ProductItem from '@/compontnent/product/productItem'
+import {ProductItem} from '@/compontnent/product/productItem'
 
 
 export const getServerSideProps: GetServerSideProps = async () => {

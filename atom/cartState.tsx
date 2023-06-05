@@ -4,7 +4,7 @@ import { Product } from '../models/models'
 export interface CartProps {
     product : Product,
     quantity: number,
-    price: string,
+    price: bigint,
 }
 
 export const cartState = atom<CartProps[]>({
