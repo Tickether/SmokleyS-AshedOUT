@@ -23,6 +23,8 @@ export const ProductItem = ({product}: ProductProps) => {
 
     const [etherPrice, setEtherPrice] = useState<string>('')
 
+    const [latestPrice, setLatestPrice] = useState<bigint>(BigInt(0))
+
     const contractReadFee = useContractRead({
         address: "0x229C0715e70741F854C299913C2446eb4400e76C",
         abi: [
@@ -38,13 +40,28 @@ export const ProductItem = ({product}: ProductProps) => {
         args: [BigInt(product.tokenId)],
         chainId: 11155111,
     })
-    //const getLatestPrice = contractReadFee?.data!
-    //const getLatestPrice =  contractReadFee?.data! ? formatEther(contractReadFee?.data!) : '';
+    
     console.log(etherPrice)
 
+    /*
     useEffect(() => {
-        const getLatestPrice =  contractReadFee?.data! && typeof contractReadFee.data === 'bigint' ? formatEther(contractReadFee?.data!) : '';
-        setEtherPrice(getLatestPrice)
+        const getLatestPriceBigInt =  contractReadFee?.data! && typeof contractReadFee.data === 'bigint' 
+        ? setLatestPrice(getLatestPriceBigInt)
+        : BigInt(0);
+    },[contractReadFee?.data!])
+*/
+    useEffect(() => {
+        if (contractReadFee?.data! && typeof contractReadFee.data === 'bigint') {
+            setEtherPrice(formatEther(contractReadFee?.data!))
+            setLatestPrice(contractReadFee?.data!)
+
+        }
+        /*
+        const getLatestPriceEther =  contractReadFee?.data! && typeof contractReadFee.data === 'bigint' 
+        ? formatEther(contractReadFee?.data!)
+        : '';
+        setEtherPrice(getLatestPriceEther)
+        */
     },[contractReadFee?.data!])
     const  { config } = usePrepareContractWrite({
         address: "0x229C0715e70741F854C299913C2446eb4400e76C",
@@ -75,7 +92,7 @@ export const ProductItem = ({product}: ProductProps) => {
     const handleCartAdd = async () => {
         try {
             if (cartItem.findIndex(cart => cart.product.tokenId ===product.tokenId) === -1) {
-                setCartItem(prevState => [...prevState, { product, quantity: 1, price: contractReadFee?.data! }])
+                setCartItem(prevState => [...prevState, { product, quantity: 1, price: latestPrice }])
                 /*
                 addToast('Carti!!!', { 
                     appearance: 'success',
