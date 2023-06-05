@@ -76,7 +76,7 @@ export const ProductItem = ({product}: ProductProps) => {
         ],
         functionName: "buy",
         args: [ (address!), (BigInt(product.tokenId)), (BigInt(1))],
-        value: contractReadFee?.data!,
+        value: latestPrice,
         chainId: 11155111,
     })
     const  contractWrite = useContractWrite(config)
