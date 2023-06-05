@@ -43,7 +43,7 @@ export const ProductItem = ({product}: ProductProps) => {
     console.log(etherPrice)
 
     useEffect(() => {
-        const getLatestPrice =  contractReadFee?.data! ? formatEther(contractReadFee?.data!) : '';
+        const getLatestPrice =  contractReadFee?.data! && typeof contractReadFee.data === 'bigint' ? formatEther(contractReadFee?.data!) : '';
         setEtherPrice(getLatestPrice)
     },[contractReadFee?.data!])
     const  { config } = usePrepareContractWrite({
