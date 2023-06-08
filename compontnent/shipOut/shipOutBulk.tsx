@@ -55,6 +55,7 @@ const ShipOutBulk = ({setOpen, finalOrders} : any) => {
         functionName: 'claimShippingBulk',
         args: [ (address!), finalOrders.tokens, (finalOrders.claims) ],
         chainId: 11155111,
+        value: undefined,
     })
 
     const  contractWriteClaimShippingBulk = useContractWrite(prepareContractWriteClaimShippingBulk.config)

@@ -45,7 +45,7 @@ const Orders : NextPage = () => {
     };
 
     fetchData();
-  }, []);
+  }, [address]);
 
   //const ownProducts = (JSON.parse(ownedProducts)).ownedNfts
   //console.log(ownProducts) 
