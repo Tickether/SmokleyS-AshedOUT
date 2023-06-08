@@ -26,7 +26,7 @@ export const OrderItem = ({ product, Order} : ProductProps) => {
   console.log(order)
 
   const contractReadBalance = useContractRead({
-    address: "0x23477F5DbeBFeec97eEC4C39c408FA0e6868b239",
+    address: "0x229C0715e70741F854C299913C2446eb4400e76C",
     abi: [
         {
           name: 'balanceOf',
@@ -51,7 +51,7 @@ useEffect(() => {
 
 
 const contractReadClaimed = useContractRead({
-    address: "0x23477F5DbeBFeec97eEC4C39c408FA0e6868b239",
+    address: "0x229C0715e70741F854C299913C2446eb4400e76C",
     abi: [
         {
           name: 'claimed',
