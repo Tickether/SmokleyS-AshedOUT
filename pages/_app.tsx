@@ -4,6 +4,8 @@ import { sepolia, mainnet, configureChains, createConfig, WagmiConfig } from 'wa
 import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
 import { Web3Modal } from '@web3modal/react'
 import { RecoilRoot } from 'recoil'
+import { Sepolia } from '@thirdweb-dev/chains';
+import { ThirdwebProvider, useContract } from '@thirdweb-dev/react'
 
 // Wagmi client
 const chains = [sepolia, mainnet];
@@ -44,9 +46,11 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <WagmiConfig config={wagmiConfig} >
-        <RecoilRoot>
-          <Component {...pageProps} />
-        </RecoilRoot>
+        <ThirdwebProvider activeChain={ Sepolia }>
+          <RecoilRoot>
+            <Component {...pageProps} />
+          </RecoilRoot>
+        </ThirdwebProvider>
       </WagmiConfig>
       <Web3Modal projectId={projectId} ethereumClient={ethereumClient} />
     </>
