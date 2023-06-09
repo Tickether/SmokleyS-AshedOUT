@@ -39,7 +39,7 @@ const ShipOutBulk = ({setOpen, finalOrders} : any) => {
         setShippingInfo((prev)=>({...prev, [e.target.id]:e.target.value}))
     };
 
-/*
+
     
     const prepareContractWriteClaimShippingBulk = usePrepareContractWrite({
         address: '0x229C0715e70741F854C299913C2446eb4400e76C',
@@ -58,9 +58,9 @@ const ShipOutBulk = ({setOpen, finalOrders} : any) => {
     })
 
     const  contractWriteClaimShippingBulk = useContractWrite(prepareContractWriteClaimShippingBulk.config)
-*/
+
     const waitForTransaction = useWaitForTransaction({
-        //hash: contractWriteClaimShippingBulk.data?.hash,
+        hash: contractWriteClaimShippingBulk.data?.hash,
         confirmations: 1,
         onSuccess() {
             /*
@@ -95,7 +95,7 @@ const ShipOutBulk = ({setOpen, finalOrders} : any) => {
             console.error('Error sending email:', error);
         }
     }
-    /*
+    
     const handleClaimSelect = async () => {
         try {
             await contractWriteClaimShippingBulk.writeAsync?.()
@@ -103,7 +103,6 @@ const ShipOutBulk = ({setOpen, finalOrders} : any) => {
             console.log(err)
         }
     }
-    */
 
     const handleCLick = async (e : any) => {
         e.preventDefault()
@@ -114,7 +113,7 @@ const ShipOutBulk = ({setOpen, finalOrders} : any) => {
             console.log('Form is valid. Proceed with submission.');
             
             // Rest of your code for handling form submission
-            //await handleClaimSelect()
+            await handleClaimSelect()
         } else {
             console.log('Form is invalid. Cannot submit.');
         }
