@@ -32,7 +32,7 @@ const Transactions : NextPage = () => {
 
   console.log(TransferBatchEvent)
 
-/*
+
   useEffect(()=>{
     const getTransactions = []
     if (shippingClaimedEvent) {
@@ -40,7 +40,7 @@ const Transactions : NextPage = () => {
       
     }  
   },[])
-*/
+
   /*
   useContractEvent({
     address: '0x229C0715e70741F854C299913C2446eb4400e76C',
