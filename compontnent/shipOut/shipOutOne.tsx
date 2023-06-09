@@ -39,8 +39,7 @@ export const ShipOutOne = ({setOpen, order} : any) => {
         setShippingInfo((prev)=>({...prev, [e.target.id]:e.target.value}))
     };
 
-
-    /*
+    
     const prepareContractWriteClaimShipping = usePrepareContractWrite({
         address: '0x229C0715e70741F854C299913C2446eb4400e76C',
         abi: [
@@ -59,9 +58,9 @@ export const ShipOutOne = ({setOpen, order} : any) => {
     
 
     const  contractWriteClaimShipping = useContractWrite(prepareContractWriteClaimShipping.config)
-*/
+
     const waitForTransaction = useWaitForTransaction({
-        //hash: contractWriteClaimShipping.data?.hash,
+        hash: contractWriteClaimShipping.data?.hash,
         confirmations: 1,
         onSuccess() {
             /*
@@ -99,7 +98,7 @@ export const ShipOutOne = ({setOpen, order} : any) => {
 
     const handleClaim = async () => {
         try {
-            //await contractWriteClaimShipping.writeAsync?.()
+            await contractWriteClaimShipping.writeAsync?.()
         } catch (err) {
             console.log(err)
         }    
