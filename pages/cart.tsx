@@ -56,7 +56,7 @@ const Cart : NextPage = () => {
      }, [cartItem]);
     
      const { config } = usePrepareContractWrite({
-        address: '0x229C0715e70741F854C299913C2446eb4400e76C',
+        address: '0x23477F5DbeBFeec97eEC4C39c408FA0e6868b239',
         abi: [
             {
               name: 'buyBulk',

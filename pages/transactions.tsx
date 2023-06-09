@@ -13,7 +13,7 @@ const Transactions : NextPage = () => {
 
   const [transactions, setTransactions] = useState()
 
-  const { contract } = useContract("0x229C0715e70741F854C299913C2446eb4400e76C");
+  const { contract } = useContract("0x23477F5DbeBFeec97eEC4C39c408FA0e6868b239");
 
   const { data: shippingClaimedEvent } = useContractEvents(contract, "shippingClaimed")
 
@@ -43,7 +43,7 @@ const Transactions : NextPage = () => {
 */
   /*
   useContractEvent({
-    address: '0x229C0715e70741F854C299913C2446eb4400e76C',
+    address: '0x23477F5DbeBFeec97eEC4C39c408FA0e6868b239',
     abi:[
       {
         name: 'shippingClaimed',
@@ -65,7 +65,7 @@ const Transactions : NextPage = () => {
   //console.log(unwatch)
 
   useContractEvent({
-    address: '0x229C0715e70741F854C299913C2446eb4400e76C',
+    address: '0x23477F5DbeBFeec97eEC4C39c408FA0e6868b239',
     abi:[
         {
         name: 'shippingClaimedBulk',
